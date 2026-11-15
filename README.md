@@ -44,3 +44,6 @@ npm test       # game-rule tests (Vitest)
 npm run lint   # oxlint
 npm run build  # type-check + production build to dist/
 ```
+
+Pushes to `main` are built and published to GitHub Pages by `.github/workflows/deploy.yml`
+(repo Settings → Pages → Source must be "GitHub Actions").
