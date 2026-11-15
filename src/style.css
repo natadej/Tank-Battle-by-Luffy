@@ -1,0 +1,102 @@
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  color: #fcfcfc;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+#app {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+#stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#screen {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #000;
+}
+#mute {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  background: #222;
+  color: #aaa;
+  border: 1px solid #444;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 11px;
+  padding: 4px 8px;
+  z-index: 3;
+}
+#controls { display: none; }
+body.touch #controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px 16px;
+}
+#dpad {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a2a2a 0 30%, #1a1a1a 31%);
+  border: 2px solid #333;
+  touch-action: none;
+}
+#dpad span {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  background: #444;
+  border-radius: 8px;
+}
+#dpad .u { left: 52px; top: 6px; }
+#dpad .d { left: 52px; bottom: 6px; }
+#dpad .l { top: 52px; left: 6px; }
+#dpad .r { top: 52px; right: 6px; }
+#dpad[data-dir='up'] .u, #dpad[data-dir='down'] .d, #dpad[data-dir='left'] .l, #dpad[data-dir='right'] .r { background: #e8a800; }
+.buttons { display: flex; gap: 16px; align-items: center; }
+.btn {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 2px solid #7c0800;
+  background: #d82800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  touch-action: none;
+}
+.btn.small { width: 58px; height: 34px; border-radius: 17px; font-size: 11px; background: #444; border-color: #222; }
+.btn.down { filter: brightness(1.4); }
+
+/* Landscape phones: controls sit either side of the screen. */
+@media (orientation: landscape) and (max-height: 600px) {
+  body.touch #app { flex-direction: row; }
+  body.touch #controls {
+    position: fixed;
+    inset: 0;
+    padding: 0 max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
+    pointer-events: none;
+  }
+  body.touch #controls > * { pointer-events: auto; }
+  body.touch .buttons { flex-direction: column-reverse; }
+}

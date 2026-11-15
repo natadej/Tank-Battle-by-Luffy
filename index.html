@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#000000" />
+    <title>Tank City</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="stage"><canvas id="screen"></canvas></div>
+      <div id="controls">
+        <div id="dpad"><span class="u"></span><span class="r"></span><span class="d"></span><span class="l"></span></div>
+        <div class="buttons">
+          <div class="btn small" data-key="start">START</div>
+          <div class="btn" data-key="fire">FIRE</div>
+        </div>
+      </div>
+    </div>
+    <button id="mute" type="button">SOUND ON</button>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
