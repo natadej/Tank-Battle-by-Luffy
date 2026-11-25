@@ -130,6 +130,7 @@ body.embedded #screen { border-radius: 0; filter: none; }
 /* Landscape phones: controls sit either side of the screen. */
 @media (orientation: landscape) and (max-height: 600px) {
   body.touch #app { flex-direction: row; }
+  body.touch.cartoon .concept-header, body.touch.cartoon .concept-footer { display: none; }
   body.touch #controls {
     position: fixed;
     inset: 0;

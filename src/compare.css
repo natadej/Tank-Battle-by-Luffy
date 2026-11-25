@@ -50,3 +50,10 @@ iframe { display: block; border: 0; width: 100%; aspect-ratio: 256 / 240; backgr
   .wordmark { font-size: 19px; }
   .play-link { padding: 10px; font-size: 10px; }
 }
+/* Keep canvas text legible on phones; desktop remains a paired comparison. */
+@media (max-width: 600px) {
+  .panels { grid-template-columns: 1fr; gap: 20px; }
+  .panel-label { padding: 0 14px; min-height: 43px; gap: 12px; }
+  .panel h2 { font-size: 12px; }
+  .look-dot { display: block; }
+}
