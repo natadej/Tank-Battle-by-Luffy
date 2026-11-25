@@ -6,7 +6,9 @@ import {
   TWO_PLAYER_BONUS,
 } from './game/rules'
 import { STAGES, stageDef } from './game/stages'
-import { type GameEvent, newPlayer, type Player, World } from './game/world'
+import { type GameEvent, IDLE_PAD, newPlayer, type Player, World } from './game/world'
+import { makeRng } from './game/rng'
+import { drawCartoon } from './gfx/cartoon'
 import { drawText, drawTextCentered, glyphPixels } from './gfx/font'
 import { COLORS, drawBrickText, drawCanopy, drawGround, drawWorld } from './gfx/render'
 import { eagleSprite, tankSprite, type TankKind } from './gfx/sprites'
@@ -55,8 +57,11 @@ export class App {
 
   private input: Input
   private sound: Sound
+  private cartoon: boolean
 
-  constructor(input: Input, sound: Sound) {
+  constructor(input: Input, sound: Sound, cartoon = false) {
+    this.cartoon = cartoon
+    if (cartoon) this.titleY = 0
     this.input = input
     this.sound = sound
     this.ranking = storage.ranking()
@@ -331,7 +336,58 @@ export class App {
 
   // ------------------------------------------------------------------ draw
 
+  /** Read-only, seeded art-direction samples. The sample loop never steps or saves. */
+  previewSample(sample: string): void {
+    this.titleY = 0
+    this.t = 240
+    if (sample === 'title') return
+    if (sample === 'ranking') {
+      this.ranking = [
+        { name: 'ACE', score: 24800, stage: 12 },
+        { name: 'MIN', score: 18600, stage: 9 },
+        { name: 'LUF', score: 12400, stage: 7 },
+        { name: 'TOM', score: 8600, stage: 5 },
+        { name: 'SKY', score: 4200, stage: 3 },
+      ].map(r => ({ ...r, players: 1, date: '1985-01-01' }))
+      this.scene = 'ranking'
+      return
+    }
+    if (sample === 'construction') {
+      this.openEditor()
+      this.editor.level = Level.fromRows(stageDef(1).map)
+      this.t = 240
+      return
+    }
+    this.players = [newPlayer(0)]
+    if (sample === 'curtain') { this.scene = 'curtain'; this.stageSelectable = true; return }
+    if (sample === 'gameover') { this.scene = 'gameover'; return }
+    const def = stageDef(1)
+    this.world = new World({ stage: 1, players: this.players, map: def.map, enemies: def.enemies, rng: makeRng(1985) })
+    for (let i = 0; i < 240; i++) this.world.update([IDLE_PAD])
+    this.scene = 'play'
+    this.openTimer = 0
+    if (sample === 'tally') {
+      this.tallyKills = [[8, 6, 4, 2]]
+      this.players[0].score = 4000
+      this.scene = 'tally'
+      this.t = 1000
+    }
+  }
+
   draw(ctx: CanvasRenderingContext2D): void {
+    if (this.cartoon) {
+      drawCartoon(ctx, {
+        scene: this.scene, t: this.t, menu: this.menuIndex, stage: this.stage, stageSelectable: this.stageSelectable,
+        hiScore: this.hiScore, lastScores: this.lastScores, players: this.players,
+        world: this.world, paused: this.paused, ranking: this.ranking, editor: this.editor,
+        tallyKills: this.tallyKills,
+        tallyCounts: this.scene === 'tally' ? this.players.map((_, p) => ENEMY_KINDS.map((_, r) => this.tallyCount(r, p))) : [],
+        tallyTotal: this.scene === 'tally' && this.t >= this.tallyTimeline().totalAt,
+        bonusAwarded: this.bonusAwarded, nameLetters: this.nameLetters, namePos: this.namePos,
+        namePlayer: this.nameQueue[0] ?? 0,
+      })
+      return
+    }
     ctx.imageSmoothingEnabled = false
     switch (this.scene) {
       case 'title': return this.drawTitle(ctx)

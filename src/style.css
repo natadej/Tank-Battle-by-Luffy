@@ -87,6 +87,45 @@ body.touch #controls {
 }
 .btn.small { width: 58px; height: 34px; border-radius: 17px; font-size: 11px; background: #444; border-color: #222; }
 .btn.down { filter: brightness(1.4); }
+.concept-header, .concept-footer { display: none; }
+
+/* The original presentation stays available at ?look=original. */
+body.cartoon { background: #e8edd7; color: #253c36; font-family: 'Trebuchet MS', system-ui, sans-serif; }
+.cartoon #app { max-width: 1400px; margin: 0 auto; padding: 0 34px; }
+.cartoon .concept-header { display: flex; align-items: center; gap: 24px; min-height: 76px; border-bottom: 1px solid #c7d0b7; font-size: 12px; font-weight: 700; }
+.concept-header a { text-decoration: none; color: inherit; }
+.concept-header a:last-child { margin-left: auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 900; letter-spacing: -.8px; }
+.brand img { width: 31px; height: 31px; }
+.concept-badge { font-size: 9px; letter-spacing: 1.5px; border-left: 1px solid #bec9ad; padding-left: 24px; color: #657567; }
+.cartoon #stage { padding: 16px 0; }
+.cartoon #screen { image-rendering: auto; background: #e8edd7; filter: drop-shadow(0 10px 16px #344e3419); border-radius: 12px; }
+.cartoon .concept-footer { display: flex; justify-content: space-between; align-items: center; min-height: 48px; border-top: 1px solid #c7d0b7; font-size: 9px; letter-spacing: .7px; color: #657567; gap: 20px; }
+.cartoon .concept-footer span:first-child { font-weight: 900; color: #315b48; }
+.cartoon #mute { top: auto; bottom: 16px; right: 40px; background: #fff6dd; color: #315b48; border: 1px solid #829374; border-radius: 20px; padding: 7px 12px; font: 800 10px 'Trebuchet MS', system-ui, sans-serif; cursor: pointer; }
+.cartoon .concept-footer { padding-right: 110px; }
+.cartoon #dpad { background: #d1d9bc; border: 2px solid #829374; box-shadow: 0 4px #829374; }
+.cartoon #dpad span { background: #829374; }
+.cartoon .btn { background: #f8c451; border: 2px solid #253c36; color: #253c36; box-shadow: 0 4px #253c36; }
+.cartoon .btn.small { background: #fff6dd; border-color: #829374; }
+.cartoon .btn.down { box-shadow: 0 1px #253c36; transform: translateY(3px); }
+body.embedded .concept-header, body.embedded .concept-footer, body.sample #controls, body.embedded #mute { display: none; }
+body.embedded #app { padding: 0; }
+body.embedded #stage { padding: 0; }
+body.embedded #screen { border-radius: 0; filter: none; }
+@media (max-width: 640px) {
+  .cartoon #app { padding: 0 12px; }
+  .cartoon .concept-header { min-height: 58px; gap: 12px; }
+  .concept-badge { display: none; }
+  .cartoon .concept-footer { min-height: 45px; padding-right: 0; font-size: 8px; }
+  .cartoon .concept-footer span:last-child { display: none; }
+  .cartoon #mute { right: 12px; bottom: 10px; }
+  body.touch.cartoon .concept-footer { display: none; }
+  body.touch.cartoon #controls { padding: 8px 2px 25px; }
+  body.touch.cartoon #dpad { width: 136px; height: 136px; }
+  body.touch.cartoon #dpad .u, body.touch.cartoon #dpad .d { left: 43px; }
+  body.touch.cartoon #dpad .l, body.touch.cartoon #dpad .r { top: 43px; }
+}
 
 /* Landscape phones: controls sit either side of the screen. */
 @media (orientation: landscape) and (max-height: 600px) {

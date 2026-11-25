@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#e8edd7" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>Tank City · Cartoon concept comparison</title>
+  </head>
+  <body>
+    <main class="comparison">
+      <header class="masthead">
+        <a class="wordmark" href="./"><img src="./favicon.svg" alt="" /> Tank City</a>
+        <span>THE ART DIRECTION SERIES &nbsp; / &nbsp; 01</span>
+        <a class="play-link" href="./">Play the concept ↗</a>
+      </header>
+      <section class="intro">
+        <div><p class="eyebrow">SAME LITTLE TANK. A WHOLE NEW FEEL.</p><h1>A little more <em>character.</em></h1></div>
+        <p class="description">The original arcade game, blended with warm storybook color, inked outlines, and tiny tanks with big personalities.</p>
+      </section>
+      <nav class="screens" aria-label="Choose a screen to compare">
+        <button type="button" data-scene="title" aria-pressed="true">01 &nbsp; Main menu</button>
+        <button type="button" data-scene="curtain" aria-pressed="false">02 &nbsp; Stage select</button>
+        <button type="button" data-scene="play" aria-pressed="false">03 &nbsp; Battle</button>
+        <button type="button" data-scene="construction" aria-pressed="false">04 &nbsp; Construction</button>
+        <button type="button" data-scene="ranking" aria-pressed="false">05 &nbsp; Ranking</button>
+        <button type="button" data-scene="tally" aria-pressed="false">06 &nbsp; Results</button>
+        <button type="button" data-scene="gameover" aria-pressed="false">07 &nbsp; Game over</button>
+      </nav>
+      <section class="panels" aria-label="Side-by-side art comparison">
+        <article class="panel original"><div class="panel-label"><span>BEFORE</span><h2>The arcade original</h2><span class="look-dot"></span></div><iframe id="before" title="Original Tank City main menu" src="./?look=original&amp;sample=title&amp;embed=1"></iframe></article>
+        <article class="panel concept"><div class="panel-label"><span>AFTER</span><h2>The cartoon blend</h2><span class="look-dot"></span></div><iframe id="after" title="Cartoon Tank City main menu" src="./?sample=title&amp;embed=1"></iframe></article>
+      </section>
+      <footer class="notes"><p><strong>New paint. Same game.</strong> Name, icon, maps, controls, and game rules stay intact.</p><p>Art concept only · Not live · <span id="sample-note">Frozen samples for a fair comparison.</span></p></footer>
+      <p class="reference-note">Direction interpreted from the request; the Facebook reference requires login. Ranking uses illustrative sample scores, never saved to your records.</p>
+    </main>
+    <script type="module" src="./src/compare.ts"></script>
+  </body>
+</html>
